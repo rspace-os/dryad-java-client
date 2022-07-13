@@ -1,0 +1,121 @@
+{
+  "_links": {
+    "self": {
+      "href": "/api/v2/datasets/doi%3A10.5061%2Fdryad.pq269b0"
+    },
+    "stash:versions": {
+      "href": "/api/v2/datasets/doi%3A10.5061%2Fdryad.pq269b0/versions"
+    },
+    "stash:version": {
+      "href": "/api/v2/versions/724"
+    },
+    "stash:download": {
+      "href": "/api/v2/datasets/doi%3A10.5061%2Fdryad.pq269b0/download"
+    },
+    "curies": [
+      {
+        "name": "stash",
+        "href": "https://github.com/CDL-Dryad/stash/blob/main/stash_api/link-relations.md#{rel}",
+        "templated": "true"
+      }
+    ]
+  },
+  "identifier": "doi:10.5061/dryad.pq269b0",
+  "id": 723,
+  "relatedPublicationISSN": "0022-3360",
+  "title": "An elongate hadrosaurid forelimb with biological traces informs the biogeography of the Lambeosaurinae",
+  "authors": [
+    {
+      "firstName": "Pierre",
+      "lastName": "Nouhaud",
+      "affiliation": "INRA; UMR1349 IGEPP (Institute for Genetics, Environment and Plant Protection); F-35653 Le Rheu France",
+      "affiliationROR": "https://ror.org/038kxsm48"
+    },
+    {
+      "firstName": "Anaïs",
+      "lastName": "Gouin",
+      "affiliation": "INRA; UMR1349 IGEPP (Institute for Genetics, Environment and Plant Protection); F-35653 Le Rheu France",
+      "affiliationROR": "https://ror.org/038kxsm48"
+    },
+    {
+      "firstName": "Julie",
+      "lastName": "Jaquiéry",
+      "affiliation": "INRA; UMR1349 IGEPP (Institute for Genetics, Environment and Plant Protection); F-35653 Le Rheu France",
+      "affiliationROR": "https://ror.org/038kxsm48"
+    },
+    {
+      "firstName": "Fabrice",
+      "lastName": "Legeai",
+      "affiliation": "INRA; UMR1349 IGEPP (Institute for Genetics, Environment and Plant Protection); F-35653 Le Rheu France",
+      "affiliationROR": "https://ror.org/038kxsm48"
+    },
+    {
+      "firstName": "Lucie",
+      "lastName": "Mieuzet",
+      "affiliation": "INRA; UMR1349 IGEPP (Institute for Genetics, Environment and Plant Protection); F-35653 Le Rheu France",
+      "affiliationROR": "https://ror.org/038kxsm48"
+    },
+    {
+      "firstName": "Jean-Christophe",
+      "lastName": "Simon",
+      "affiliation": "INRA; UMR1349 IGEPP (Institute for Genetics, Environment and Plant Protection); F-35653 Le Rheu France",
+      "affiliationROR": "https://ror.org/038kxsm48"
+    },
+    {
+      "firstName": "Mathieu",
+      "lastName": "Gautier",
+      "affiliation": "Montpellier SupAgro",
+      "affiliationROR": "https://ror.org/03rnk6m14"
+    },
+    {
+      "firstName": "Renaud",
+      "lastName": "Vitalis",
+      "affiliation": "Montpellier SupAgro",
+      "affiliationROR": "https://ror.org/03rnk6m14"
+    },
+    {
+      "firstName": "Jean",
+      "lastName": "Peccoud",
+      "affiliation": "University of Poitiers",
+      "affiliationROR": "https://ror.org/04xhy8q59"
+    },
+    {
+      "firstName": "Carole M.",
+      "lastName": "Smadja",
+      "affiliation": "French National Centre for Scientific Research",
+      "affiliationROR": "https://ror.org/02feahw73"
+    },
+    {
+      "firstName": "Chase",
+      "lastName": "Brownstein",
+      "email": "chasethedinosaur@gmail.com"
+    },
+    {
+      "firstName": "Immanuel",
+      "lastName": "Bissell"
+    },
+    {
+      "firstName": "Chase",
+      "lastName": "Brownstein",
+      "email": "chasethedinosaur@gmail.com"
+    },
+    {
+      "firstName": "Immanuel",
+      "lastName": "Bissell"
+    }
+  ],
+  "abstract": "Although the fossil record of the Late Cretaceous eastern North American landmass Appalachia is poor compared to that from the American West, it includes material from surprisingly aberrant terrestrial vertebrates that may represent relict forms which persisted in relative isolation until the end of the Mesozoic Era. One intriguing question is to what extent eastern and western North American faunas interspersed following the closure of the Western Interior Seaway during the Maastrichtian Stage of the Late Cretaceous about 70 million years ago. Isolated remains from the Atlantic Coastal Plain in New Jersey have been preliminarily identified as the bones of the crested lambeosaurine hadrosaurids, a derived clade known from the Cretaceous of Asia, western North America, and Europe, but have not been formally described. We describe the partial forelimb of a large hadrosaurid from the late Maastrichtian New Egypt Formation of New Jersey. The ulna preserves multiple deep scores identifiable as shark feeding marks, and both bones show ovoid and circular marks attributable to invertebrates. This forelimb is very similar to another partial one from the same area that shows evidence of septic arthritis. Both these specimens and a complete humerus from the same unit are closely comparable to the lower forelimbs of lambeosaurines among hadrosaurid dinosaurs. Although the absence of lambeosaurine synapomorphies observable on the the New Egypt Formation forelimbs precludes their definite referral to Lambeosaurinae, they show a morphotype of large hadrosauromorph with a distinctly elongate antebrachium existed in the latest Maastrichtian of eastern North America and allow for a revision of the latest Cretaceous biogeography of crested herbivorous dinosaurs.",
+  "versionNumber": 1,
+  "versionStatus": "in_progress",
+  "curationStatus": "Published",
+  "versionChanges": "none",
+  "publicationDate": "2018-08-01",
+  "lastModificationDate": "2020-08-24",
+  "visibility": "public",
+  "sharingLink": "https://dryad-stg.cdlib.org/stash/share/jNcUZbsH2JLU3fV47aiycfbyiP7p8gPQtj8cuzxploU",
+  "userId": 3,
+  "changedFields": [
+    "none"
+  ],
+  "license": "https://creativecommons.org/publicdomain/zero/1.0/"
+}
