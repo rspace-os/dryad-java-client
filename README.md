@@ -1,2 +1,2 @@
 # dryad-java-client
- Java client for interacting with Dryad's API
+A Java client for interacting with Dryad's API: https://datadryad.org/stash
