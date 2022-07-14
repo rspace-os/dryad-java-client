@@ -2,12 +2,15 @@ package model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
+import model.location.DryadGeoLocation;
 
 import java.util.List;
 
 @Data
 public class DryadDataset {
 
+    @JsonProperty("_links")
+    private DryadLinks links;
     private String identifier;
     private Integer id;
     private Long storageSize;

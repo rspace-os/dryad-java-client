@@ -3,24 +3,55 @@ package client;
 import model.DryadDataset;
 import model.DryadFile;
 import model.DryadSubmission;
-import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.util.List;
 
 public interface DryadClient {
 
-    // Datasets
-    DryadSubmission createSubmission(DryadSubmission submission);
+    /**
+     * Create a Dryad submission.
+     * @param submission The Dryad submission to create.
+     * @return The created Dryad submission.
+     */
+    DryadDataset createSubmission(DryadSubmission submission);
 
+    /**
+     * Get all datasets
+     * @return List of DryadDataset
+     */
     List<DryadDataset> getDatasets();
 
+    /**
+     * Get a dataset by its DOI.
+     * @param doi The DOI of the dataset.
+     * @return The dataset.
+     */
     DryadDataset getDataset(String doi);
 
-    DryadDataset updateDataset(String doi);
+    /**
+     * Update a dataset.
+     * @param doi The dataset's DOI.
+     * @param dryadDataset The dataset to update.
+     * @return The updated dataset.
+     */
+    DryadDataset updateDataset(String doi, DryadDataset dryadDataset);
 
-    // File operations
-    DryadFile stageFile(String doi, String filename, MultipartFile file);
+    /**
+     * Upload a file to a Dryad dataset.
+     * @param doi the Dryad dataset DOI
+     * @param filename the filename of the file to upload
+     * @param file the file to upload
+     * @return the DryadFile object representing the uploaded file.
+     */
+    DryadFile stageFile(String doi, String filename, File file);
 
+    /**
+     * Attach a file to a Dryad dataset by its url.
+     * @param doi The Dryad dataset's doi.
+     * @param url The url of the file to attach.
+     * @return The DryadFile object representing the file.
+     */
     DryadFile stageFile(String doi, String url);
 
 

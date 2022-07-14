@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.client.MockRestServiceServer;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.List;
@@ -43,21 +44,24 @@ public class DryadClientTest {
 
     @Test
     public void testDryadSubmission() throws IOException {
-        String submissionJson = IOUtils.resourceToString("/dryadSubmission.json", Charset.defaultCharset());
+        String submissionRequestJson = IOUtils.resourceToString("/dryadSubmissionRequest.json", Charset.defaultCharset());
+        String submissionResponseJson = IOUtils.resourceToString("/dryadSubmissionResponse.json", Charset.defaultCharset());
         mockServer.expect(requestTo(dryadClientImpl.getApiUrlBase() + "/datasets"))
                 .andExpect(method(HttpMethod.POST))
                 .andRespond(withStatus(HttpStatus.CREATED)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .body(submissionJson));
-        DryadSubmission toSubmit = objectMapper.readValue(submissionJson, DryadSubmission.class);
-        DryadSubmission submissionResponse = dryadClientImpl.createSubmission(toSubmit);
+                        .body(submissionResponseJson));
+        DryadSubmission toSubmit = objectMapper.readValue(submissionRequestJson, DryadSubmission.class);
+        DryadDataset submissionResponse = dryadClientImpl.createSubmission(toSubmit);
         assertNotNull(submissionResponse);
-        assertEquals(submissionResponse, toSubmit);
+        assertEquals("doi:10.5072/FK2708471V", submissionResponse.getIdentifier());
+        assertEquals("A Study of Red-Black Trees with Weight", submissionResponse.getTitle());
+
     }
 
     @Test
     public void testDryadGetDatasets() throws IOException {
-        String datasetsJson = IOUtils.resourceToString("/dryadDatasets.json", Charset.defaultCharset());
+        String datasetsJson = IOUtils.resourceToString("/dryadDatasetsResponse.json", Charset.defaultCharset());
         mockServer.expect(requestTo(dryadClientImpl.getApiUrlBase() + "/datasets"))
                 .andExpect(method(HttpMethod.GET))
                 .andRespond(withStatus(HttpStatus.OK).contentType(MediaType.APPLICATION_JSON).body(datasetsJson));
@@ -70,7 +74,7 @@ public class DryadClientTest {
 
     @Test
     void testDryadGetDataset() throws IOException {
-        String datasetJson = IOUtils.resourceToString("/dryadDataset.json", Charset.defaultCharset());
+        String datasetJson = IOUtils.resourceToString("/dryadDatasetResponse.json", Charset.defaultCharset());
         mockServer.expect(requestTo(dryadClientImpl.getApiUrlBase() + "/datasets/doi:10.5061/dryad.pq269b0"))
                 .andExpect(method(HttpMethod.GET))
                 .andRespond(withStatus(HttpStatus.OK).contentType(MediaType.APPLICATION_JSON).body(datasetJson));
@@ -99,6 +103,27 @@ public class DryadClientTest {
         assertEquals(dryadFile.getStatus(), "copied");
     }
 
+    @Test
+    void testStageFileFile() {
+        String filename = "ethane.jpg";
+        mockServer.expect(requestTo(dryadClientImpl.getApiUrlBase() + "/datasets/doi:10.5061/dryad.pq269b0/files/" + filename))
+                .andExpect(method(HttpMethod.POST))
+                .andRespond(withStatus(HttpStatus.CREATED)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body("{  \"path\": \"I0006475A.jpg\",\n" +
+                                "  \"size\": 218594,\n" +
+                                "  \"mimeType\": \"image/jpeg\",\n" +
+                                "  \"status\": \"copied\"\n" +
+                                "}"));
+        File testFile = new File("/ethane.jpg");
+
+        DryadFile dryadFile = dryadClientImpl.stageFile("doi:10.5061/dryad.pq269b0", filename, testFile);
+        assertNotNull(dryadFile);
+        assertEquals(dryadFile.getPath(), "I0006475A.jpg");
+        assertEquals(dryadFile.getSize(), 218594);
+        assertEquals(dryadFile.getMimeType(), "image/jpeg");
+        assertEquals(dryadFile.getStatus(), "copied");
+    }
 
 
 

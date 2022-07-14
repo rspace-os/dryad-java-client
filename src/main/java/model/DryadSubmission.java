@@ -3,6 +3,7 @@ package model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import model.location.DryadGeoLocation;
 
 import java.util.List;
 
@@ -21,7 +22,10 @@ public class DryadSubmission {
     private List<String> keywords;
     private String methods;
     private String usageNotes;
+    private String license;
+    private List<DryadGeoLocation> locations;
     private List<DryadRelatedWork> relatedWorks;
+    private String relatedPublicationISSN;
 
 
 
