@@ -26,3 +26,5 @@ replay_pid*
 #Idea
 /.idea/
 /target/
+dryad-java-client.iml
+/.mvn/
