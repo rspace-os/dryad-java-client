@@ -15,6 +15,8 @@ import org.springframework.test.web.client.MockRestServiceServer;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.List;
 
@@ -31,8 +33,8 @@ public class DryadClientTest {
     private ObjectMapper objectMapper;
 
     @BeforeEach
-    public void startUp() {
-        dryadClientImpl = new DryadClientImpl("https://dryad-stg.cdlib.org/api/v2", "token");
+    public void startUp() throws MalformedURLException {
+        dryadClientImpl = new DryadClientImpl(new URL("https://dryad-stg.cdlib.org/api/v2"), "token");
         mockServer = MockRestServiceServer.createServer(dryadClientImpl.getRestTemplate());
         objectMapper = new ObjectMapper();
     }

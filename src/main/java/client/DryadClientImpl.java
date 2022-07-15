@@ -18,6 +18,7 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.File;
+import java.net.URL;
 import java.util.List;
 import java.util.Objects;
 
@@ -26,12 +27,12 @@ import java.util.Objects;
 @Slf4j
 public class DryadClientImpl implements DryadClient {
 
-    private String apiUrlBase;
+    private URL apiUrlBase;
     private String token;
     private RestTemplate restTemplate;
 
 
-    public DryadClientImpl(String apiUrlBase, String token) {
+    public DryadClientImpl(URL apiUrlBase, String token) {
         this.apiUrlBase = apiUrlBase;
         this.token = token;
         this.restTemplate = new RestTemplate();
