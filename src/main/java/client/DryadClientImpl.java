@@ -6,6 +6,7 @@ import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import model.DryadDataset;
 import model.DryadDatasets;
+import model.DryadEmbedded;
 import model.DryadFile;
 import model.DryadSubmission;
 import org.springframework.http.HttpEntity;
@@ -19,6 +20,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.io.File;
 import java.net.URL;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -41,6 +43,17 @@ public class DryadClientImpl implements DryadClient {
 
 
     @Override
+    public boolean testConnection() {
+        try {
+            ResponseEntity<String> response = restTemplate.getForEntity(apiUrlBase + "/test", String.class);
+            return response.getStatusCode().is2xxSuccessful();
+        } catch (Exception e) {
+            log.error("Error testing connection to Dryad API: " + e.getMessage());
+            return false;
+        }
+    }
+
+    @Override
     public DryadDataset createSubmission(DryadSubmission submission) {
         ResponseEntity<DryadDataset> responseEntity = restTemplate.exchange(apiUrlBase + "/datasets", HttpMethod.POST,
                 new HttpEntity<>(getHttpHeaders()), DryadDataset.class, submission);
@@ -53,7 +66,12 @@ public class DryadClientImpl implements DryadClient {
         ResponseEntity<DryadDatasets> responseEntity = restTemplate.exchange(apiUrlBase + "/datasets", HttpMethod.GET,
                 new HttpEntity<>(getHttpHeaders()), DryadDatasets.class);
         log.debug(Objects.requireNonNull(responseEntity.getBody()).toString());
-        return responseEntity.getBody().getEmbedded().getDatasets();
+        DryadEmbedded embedded = responseEntity.getBody().getEmbedded();
+        if (embedded == null) {
+            return Collections.emptyList();
+        } else {
+            return embedded.getDatasets();
+        }
     }
 
     @Override

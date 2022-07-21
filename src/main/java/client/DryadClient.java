@@ -9,6 +9,9 @@ import java.util.List;
 
 public interface DryadClient {
 
+
+    boolean testConnection();
+
     /**
      * Create a Dryad submission.
      * @param submission The Dryad submission to create.
@@ -53,6 +56,8 @@ public interface DryadClient {
      * @return The DryadFile object representing the file.
      */
     DryadFile stageFile(String doi, String url);
+
+
 
 
 

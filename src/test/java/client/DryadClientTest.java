@@ -45,6 +45,14 @@ public class DryadClientTest {
     }
 
     @Test
+    public void testTestConnection() {
+        mockServer.expect(requestTo("https://dryad-stg.cdlib.org/api/v2/test"))
+                .andExpect(method(HttpMethod.GET))
+                .andRespond(withStatus(HttpStatus.OK));
+        assertEquals(true, dryadClientImpl.testConnection());
+    }
+
+    @Test
     public void testDryadSubmission() throws IOException {
         String submissionRequestJson = IOUtils.resourceToString("/dryadSubmissionRequest.json", Charset.defaultCharset());
         String submissionResponseJson = IOUtils.resourceToString("/dryadSubmissionResponse.json", Charset.defaultCharset());
