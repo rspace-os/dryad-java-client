@@ -5,11 +5,16 @@ import model.DryadFile;
 import model.DryadSubmission;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 public interface DryadClient {
 
 
+    /**
+     * Test connection to Dryad API.
+     * @return true if connection is successful.
+     */
     boolean testConnection();
 
     /**
@@ -47,7 +52,7 @@ public interface DryadClient {
      * @param file the file to upload
      * @return the DryadFile object representing the uploaded file.
      */
-    DryadFile stageFile(String doi, String filename, File file);
+    DryadFile stageFile(String doi, String filename, File file) throws IOException;
 
     /**
      * Attach a file to a Dryad dataset by its url.

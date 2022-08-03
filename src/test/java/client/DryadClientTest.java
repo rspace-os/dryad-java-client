@@ -114,7 +114,7 @@ public class DryadClientTest {
     }
 
     @Test
-    void testStageFileFile() {
+    void testStageFileFile() throws IOException {
         String filename = "ethane.jpg";
         mockServer.expect(requestTo(dryadClientImpl.getApiUrlBase() + "/datasets/doi:10.5061/dryad.pq269b0/files/" + filename))
                 .andExpect(method(HttpMethod.POST))
