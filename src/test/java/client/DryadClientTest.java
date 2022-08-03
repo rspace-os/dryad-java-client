@@ -85,7 +85,7 @@ public class DryadClientTest {
     @Test
     void testDryadGetDataset() throws IOException {
         String datasetJson = IOUtils.resourceToString("/dryadDatasetResponse.json", Charset.defaultCharset());
-        mockServer.expect(requestTo(dryadClientImpl.getApiUrlBase() + "/datasets/doi:10.5061/dryad.pq269b0"))
+        mockServer.expect(requestTo(dryadClientImpl.getApiUrlBase() + "/datasets/doi%253A10.5061%252Fdryad.pq269b0"))
                 .andExpect(method(HttpMethod.GET))
                 .andRespond(withStatus(HttpStatus.OK).contentType(MediaType.APPLICATION_JSON).body(datasetJson));
 
@@ -96,43 +96,42 @@ public class DryadClientTest {
 
     @Test
     void testStageFileUrl() {
-        mockServer.expect(requestTo(dryadClientImpl.getApiUrlBase() + "/datasets/doi:10.5061/dryad.pq269b0/urls"))
+        mockServer.expect(requestTo(dryadClientImpl.getApiUrlBase() + "/datasets/doi%253A10.5061%252Fdryad.pq269b0/urls"))
                 .andExpect(method(HttpMethod.POST))
                 .andRespond(withStatus(HttpStatus.CREATED)
                         .contentType(MediaType.APPLICATION_JSON)
                         .body("{  \"path\": \"I0006475A.jpg\",\n" +
                                 "  \"size\": 218594,\n" +
                                 "  \"mimeType\": \"image/jpeg\",\n" +
-                                "  \"status\": \"copied\"\n" +
+                                "  \"status\": \"created\"\n" +
                                 "}"));
         DryadFile dryadFile = dryadClientImpl.stageFile("doi:10.5061/dryad.pq269b0", "http://www.example.com/I0006475A.jpg");
         assertNotNull(dryadFile);
         assertEquals(dryadFile.getPath(), "I0006475A.jpg");
         assertEquals(dryadFile.getSize(), 218594);
         assertEquals(dryadFile.getMimeType(), "image/jpeg");
-        assertEquals(dryadFile.getStatus(), "copied");
+        assertEquals(dryadFile.getStatus(), "created");
     }
 
     @Test
     void testStageFileFile() throws IOException {
-        String filename = "ethane.jpg";
-        mockServer.expect(requestTo(dryadClientImpl.getApiUrlBase() + "/datasets/doi:10.5061/dryad.pq269b0/files/" + filename))
-                .andExpect(method(HttpMethod.POST))
+        mockServer.expect(requestTo(dryadClientImpl.getApiUrlBase() + "/datasets/doi%253A10.5061%252Fdryad.pq269b0/files/ethane.jpg"))
+                .andExpect(method(HttpMethod.PUT))
                 .andRespond(withStatus(HttpStatus.CREATED)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .body("{  \"path\": \"I0006475A.jpg\",\n" +
+                        .body("{  \"path\": \"ethane.jpg\",\n" +
                                 "  \"size\": 218594,\n" +
                                 "  \"mimeType\": \"image/jpeg\",\n" +
-                                "  \"status\": \"copied\"\n" +
+                                "  \"status\": \"created\"\n" +
                                 "}"));
-        File testFile = new File("/ethane.jpg");
+        File testFile = new File("src/main/resources/ethane.jpg");
 
-        DryadFile dryadFile = dryadClientImpl.stageFile("doi:10.5061/dryad.pq269b0", filename, testFile);
+        DryadFile dryadFile = dryadClientImpl.stageFile("doi:10.5061/dryad.pq269b0", "ethane.jpg", testFile);
         assertNotNull(dryadFile);
-        assertEquals(dryadFile.getPath(), "I0006475A.jpg");
+        assertEquals(dryadFile.getPath(), "ethane.jpg");
         assertEquals(dryadFile.getSize(), 218594);
         assertEquals(dryadFile.getMimeType(), "image/jpeg");
-        assertEquals(dryadFile.getStatus(), "copied");
+        assertEquals(dryadFile.getStatus(), "created");
     }
 
 
