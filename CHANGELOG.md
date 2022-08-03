@@ -10,7 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added required JSON header to http entity
 - Added URL encoding when appending strings to Dryad API endpoints
 - Added a few logs for debugging
-- Added requestFactory.setBufferRequestBody(false) to prevent OOM errors for large file uploads with RestTemplate
+- Added `requestFactory.setBufferRequestBody(false)` to prevent OOM errors for large file uploads with RestTemplate
 
 ## [0.1.3] - 2022-07-21
 - Added testConnection method to client to test if connection to dryad is working.
