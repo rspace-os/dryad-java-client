@@ -31,6 +31,7 @@ public class DryadDataset {
     private String lastModificationDate;
     private String visibility;
     private String sharingLink;
+    private String editLink;
     private Integer userId;
     private String license;
 
