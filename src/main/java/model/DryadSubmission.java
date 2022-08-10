@@ -18,6 +18,7 @@ public class DryadSubmission {
     private List<DryadAuthor> authors;
     @JsonProperty("abstract")
     private String dryadAbstract;
+    private String fieldOfScience;
     private List<DryadFunder> funders;
     private List<String> keywords;
     private String methods;
