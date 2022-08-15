@@ -3,6 +3,7 @@ package client;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import model.DryadDataset;
 import model.DryadFile;
+import model.DryadFunder;
 import model.DryadSubmission;
 import org.apache.commons.io.IOUtils;
 import org.junit.jupiter.api.AfterEach;
@@ -26,7 +27,7 @@ import static org.springframework.test.web.client.match.MockRestRequestMatchers.
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withStatus;
 
-public class DryadClientTest {
+class DryadClientTest {
 
     private DryadClientImpl dryadClientImpl;
     private MockRestServiceServer mockServer;
@@ -132,6 +133,15 @@ public class DryadClientTest {
         assertEquals(dryadFile.getSize(), 218594);
         assertEquals(dryadFile.getMimeType(), "image/jpeg");
         assertEquals(dryadFile.getStatus(), "created");
+    }
+
+    @Test
+    void testCrossrefFunderDeserialization() throws IOException {
+        String funderJson = IOUtils.resourceToString("/crossrefFunder.json", Charset.defaultCharset());
+        DryadFunder funder = objectMapper.readValue(funderJson, DryadFunder.class);
+        assertNotNull(funder);
+        assertEquals("http://dx.doi.org/10.13039/100000001", funder.getIdentifier());
+        assertEquals("National Science Foundation", funder.getOrganization());
     }
 
 
