@@ -54,7 +54,7 @@ public class DryadClientImpl implements DryadClient {
     public boolean testConnection() {
         try {
             ResponseEntity<String> response = restTemplate.exchange(apiUrlBase + "/test", HttpMethod.GET, new HttpEntity<>(getHttpHeaders()), String.class);
-            log.info("Test connection response: {}", response.getBody());
+            log.debug("Test connection response: {}", response.getBody());
             return response.getStatusCode().is2xxSuccessful();
         } catch (RestClientException e) {
             log.error("Error testing connection to Dryad API: " + e.getMessage());
