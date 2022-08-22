@@ -1,14 +1,14 @@
-package client;
+package com.researchspace.dryad.client;
 
 
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
-import model.DryadDataset;
-import model.DryadDatasets;
-import model.DryadEmbedded;
-import model.DryadFile;
-import model.DryadSubmission;
+import com.researchspace.dryad.model.DryadDataset;
+import com.researchspace.dryad.model.DryadDatasets;
+import com.researchspace.dryad.model.DryadEmbedded;
+import com.researchspace.dryad.model.DryadFile;
+import com.researchspace.dryad.model.DryadSubmission;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;

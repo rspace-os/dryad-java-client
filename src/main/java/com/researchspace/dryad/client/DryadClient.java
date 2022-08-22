@@ -1,8 +1,8 @@
-package client;
+package com.researchspace.dryad.client;
 
-import model.DryadDataset;
-import model.DryadFile;
-import model.DryadSubmission;
+import com.researchspace.dryad.model.DryadDataset;
+import com.researchspace.dryad.model.DryadFile;
+import com.researchspace.dryad.model.DryadSubmission;
 
 import java.io.File;
 import java.io.IOException;

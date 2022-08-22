@@ -1,4 +1,4 @@
-package model;
+package com.researchspace.dryad.model;
 
 public class DryadLinks {
 

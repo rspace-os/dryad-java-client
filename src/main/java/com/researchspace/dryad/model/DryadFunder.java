@@ -1,4 +1,4 @@
-package model;
+package com.researchspace.dryad.model;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;

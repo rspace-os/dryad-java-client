@@ -1,4 +1,4 @@
-package model.location;
+package com.researchspace.dryad.model.location;
 
 import lombok.Data;
 

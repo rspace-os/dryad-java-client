@@ -1,8 +1,8 @@
-package model;
+package com.researchspace.dryad.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
-import model.location.DryadGeoLocation;
+import com.researchspace.dryad.model.location.DryadGeoLocation;
 
 import java.util.List;
 

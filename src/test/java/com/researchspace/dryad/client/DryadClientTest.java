@@ -1,10 +1,10 @@
-package client;
+package com.researchspace.dryad.client;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import model.DryadDataset;
-import model.DryadFile;
-import model.DryadFunder;
-import model.DryadSubmission;
+import com.researchspace.dryad.model.DryadDataset;
+import com.researchspace.dryad.model.DryadFile;
+import com.researchspace.dryad.model.DryadFunder;
+import com.researchspace.dryad.model.DryadSubmission;
 import org.apache.commons.io.IOUtils;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
