@@ -108,10 +108,10 @@ class DryadClientTest {
                                 "}"));
         DryadFile dryadFile = dryadClientImpl.stageFile("doi:10.5061/dryad.pq269b0", "http://www.example.com/I0006475A.jpg");
         assertNotNull(dryadFile);
-        assertEquals(dryadFile.getPath(), "I0006475A.jpg");
-        assertEquals(dryadFile.getSize(), 218594);
-        assertEquals(dryadFile.getMimeType(), "image/jpeg");
-        assertEquals(dryadFile.getStatus(), "created");
+        assertEquals("I0006475A.jpg", dryadFile.getPath());
+        assertEquals(218594, dryadFile.getSize());
+        assertEquals("image/jpeg", dryadFile.getMimeType());
+        assertEquals("created", dryadFile.getStatus());
     }
 
     @Test
@@ -129,10 +129,10 @@ class DryadClientTest {
 
         DryadFile dryadFile = dryadClientImpl.stageFile("doi:10.5061/dryad.pq269b0", "ethane.jpg", testFile);
         assertNotNull(dryadFile);
-        assertEquals(dryadFile.getPath(), "ethane.jpg");
-        assertEquals(dryadFile.getSize(), 218594);
-        assertEquals(dryadFile.getMimeType(), "image/jpeg");
-        assertEquals(dryadFile.getStatus(), "created");
+        assertEquals("ethane.jpg", dryadFile.getPath());
+        assertEquals(218594, dryadFile.getSize());
+        assertEquals("image/jpeg", dryadFile.getMimeType());
+        assertEquals("created", dryadFile.getStatus());
     }
 
     @Test
@@ -143,8 +143,5 @@ class DryadClientTest {
         assertEquals("http://dx.doi.org/10.13039/100000001", funder.getIdentifier());
         assertEquals("National Science Foundation", funder.getOrganization());
     }
-
-
-
 
 }
