@@ -1,6 +1,8 @@
 package com.researchspace.dryad.client;
 
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -15,7 +17,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
@@ -37,16 +38,16 @@ public class DryadClientImpl implements DryadClient {
     private URL apiUrlBase;
     private String token;
     private RestTemplate restTemplate;
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
 
     public DryadClientImpl(URL apiUrlBase, String token) {
         this.apiUrlBase = apiUrlBase;
         this.token = token;
+        // The default factory streams request bodies, which keeps large file uploads out
+        // of memory. JSON payloads are serialized up front (see createSubmission) so they
+        // still carry a Content-Length header; Dryad rejects chunked requests.
         this.restTemplate = new RestTemplate();
-        SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
-        requestFactory.setBufferRequestBody(false);
-        this.restTemplate.setRequestFactory(requestFactory);
-
     }
 
 
@@ -64,10 +65,22 @@ public class DryadClientImpl implements DryadClient {
 
     @Override
     public DryadDataset createSubmission(DryadSubmission submission) {
-        HttpEntity<DryadSubmission> request = new HttpEntity<>(submission, getHttpHeaders());
+        HttpEntity<byte[]> request = new HttpEntity<>(toJsonBytes(submission), getHttpHeaders());
         ResponseEntity<DryadDataset> responseEntity = restTemplate.postForEntity(apiUrlBase + "/datasets", request, DryadDataset.class);
         log.debug(Objects.requireNonNull(responseEntity.getBody()).toString());
         return responseEntity.getBody();
+    }
+
+    /**
+     * Serializes a request body up front so it is sent with a Content-Length header
+     * rather than chunked, which Dryad rejects.
+     */
+    private byte[] toJsonBytes(Object body) {
+        try {
+            return objectMapper.writeValueAsBytes(body);
+        } catch (JsonProcessingException e) {
+            throw new IllegalArgumentException("Couldn't serialize Dryad request body", e);
+        }
     }
 
     @Override
